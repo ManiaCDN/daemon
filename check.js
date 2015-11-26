@@ -56,7 +56,7 @@ function checkServers(forceDnsUpdate) {
 
             console.log('  Checking ' + ip + '...');
             // Chech the server for status
-            timechecker.checkServer(ip4, 80, status, function (err, needUpdate, needDNSUpdate, newStatus) {
+            timechecker.checkServer(ip, 80, status, function (err, needUpdate, needDNSUpdate, newStatus) {
                 console.log('     --> OldStatus: ' + status + ', newStatus: ' + newStatus);
 
                 // Add to report
@@ -107,7 +107,6 @@ function checkServers(forceDnsUpdate) {
 
             // Do the DNS Update
             if (DNSUpdate) {
-                // TODO: DNS UPDATE
                 console.log('==== DNS Update needed.. Executing... ====');
                 dns.updateRecords(function (err, success) {
                     inCheck = false;
