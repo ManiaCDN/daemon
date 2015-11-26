@@ -1,0 +1,17 @@
+{
+  "name": "ManiaCDN",
+  "description": "",
+  "main": "maniacdn.js",
+  "license": "GPL-3.0",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components/",
+    "test",
+    "tests"
+  ]
+}
