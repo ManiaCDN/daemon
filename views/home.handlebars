@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ManiaCDN</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="components/fuelux/dist/css/fuelux.min.css" />
-    <link rel="stylesheet" href="stylesheets/style.css" />
-</head>
-<body class="fuelux">
     <div class="jumbotron">
         <div class="container">
             <h1>ManiaCDN</h1>
@@ -23,7 +11,7 @@
 
             <div class="col-md-3 col-md-push-9 sidebar" role="complementary">
                 <nav class="nav-sidebar hidden-print hidden-xs hidden-sm" data-spy="affix" data-offset-top="300" data-offset-bottom="0">
-                    <ul class="nav-sidebar-list nav nav-stacked fixed">
+                    <ul class="nav-sidebar-list nav nav-stacked">
                         <li class="active">
                             <a href="#cdn_home">Overview</a>
                         </li>
@@ -71,19 +59,69 @@
                 <section id="cdn_status" class="group">
                     <h1>Status</h1>
                     <p>The actual status of the ManiaCDN network:</p>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+                    <p>Online mirrors: {{mirrorsOnline}}</p>
 
                 </section>
+
+                <section id="cdn_mirrors" class="group">
+                    <h1>Mirrors</h1>
+                    <p>List with mirrors and the update time</p>
+
+                    <table class="table table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>IP</th>
+                                <th>Countrycode</th>
+                                <th>Active</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {{#each mirrors}}
+                            {{#if active}}
+                                <tr class="">
+                            {{else}}
+                                <tr class="active">
+                            {{/if}}
+                                <td>
+                                    <code>
+                                        {{ip4}}{{ip6}}
+                                    </code>
+                                </td>
+
+                                <td>
+                                    {{countrycode}}
+                                </td>
+
+                                <td>
+                                    {{#if active}}
+                                        <label class="label label-success">
+                                            Server is active!
+                                        </label>
+                                    {{else}}
+                                        <label class="label label-warning">
+                                            Server is inactive!
+                                        </label>
+                                    {{/if}}
+                                </td>
+
+                                <td>
+                                    <div class="server-status" data-status="{{status}}"></div>
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+
+                </section>
+
+
+                <br><br><br><br>
+
+
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
             </div>
         </div>
     </div>
-
-    <script src="components/jquery/dist/jquery.min.js"></script>
-    <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="components/moment/min/moment.min.js"></script>
-    <script src="components/fuelux/dist/js/fuelux.min.js"></script>
-</body>
-</html>
