@@ -112,6 +112,8 @@ function checkServers(forceDnsUpdate) {
                 dns.updateRecords(function (err, success) {
                     inCheck = false;
                     sendReport(AnyUpdate, reportList);
+
+                    console.log('==== Done ====');
                 });
             }else{
                 inCheck = false;
