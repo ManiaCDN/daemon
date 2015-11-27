@@ -17,6 +17,7 @@
     "forever-monitor": "^1.7.0",
     "handlebars": "^4.0.5",
     "jade": "~1.11.0",
+    "list-diff": "^0.2.0",
     "moira": "^1.1.2",
     "moment": "^2.10.6",
     "morgan": "~1.6.1",
