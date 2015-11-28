@@ -2,7 +2,9 @@
         <div class="container">
             <h1>ManiaCDN</h1>
             <p>The ManiaPlanet CDN, for the community, by the community.</p>
-            <p><a class="btn btn-primary btn-lg">Get involved</a></p>
+            <p>
+                <a class="btn btn-primary btn-lg">Get involved</a>
+            </p>
         </div>
     </div>
     <div class="container">
@@ -26,6 +28,14 @@
                         </li>
                     </ul>
                 </nav>
+
+                <br>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="E6T8CWAUN32ZG">
+                    <input type="image" src="https://www.paypalobjects.com/en_US/NL/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
             </div>
 
 
@@ -72,7 +82,7 @@
                         <thead>
                             <tr>
                                 <th>IP</th>
-                                <th>Countrycode</th>
+                                <th>Loc.</th>
                                 <th>Active</th>
                                 <th>Status</th>
                             </tr>
@@ -97,11 +107,11 @@
                                 <td>
                                     {{#if active}}
                                         <label class="label label-success">
-                                            Server is active!
+                                            Active
                                         </label>
                                     {{else}}
                                         <label class="label label-warning">
-                                            Server is inactive!
+                                            Inactive
                                         </label>
                                     {{/if}}
                                 </td>
@@ -115,7 +125,6 @@
                     </table>
 
                 </section>
-
 
                 <br><br><br><br>
 

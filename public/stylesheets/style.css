@@ -65,3 +65,7 @@
     background-color: #5cb85c;
     color: #fff;
 }
+
+form.paypal {
+    display: inline-block
+}

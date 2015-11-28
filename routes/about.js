@@ -24,8 +24,7 @@ router.get('/', function (req, res, next) {
     WHERE
         active = 1
         AND status > 0
-        AND status < 4
-    GROUP BY serverid;
+        AND status < 4;
     `;
 
     let mirrorStatusSql = `
