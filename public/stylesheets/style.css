@@ -38,12 +38,39 @@
     border-left: 1px solid #0f5f9f;
 }
 
-.nav-sidebar-list > li.active > a {
-    padding-left: 18px;
+.nav-sidebar-list .nav > li > a:hover {
+    color: #0f5f9f;
+}
+
+.nav-sidebar-list.nav > .active > a, .nav-sidebar-list.nav .nav > .active > a {
     font-weight: 700;
     color: #0f5f9f;
     background-color: transparent;
+}
+.nav-sidebar-list.nav > .active > a {
     border-left: 2px solid #0f5f9f;
+    padding-left: 18px;
+}
+.nav-sidebar-list.nav .nav > .active > a {
+    padding-left: 30px;
+}
+
+
+/* nested */
+.nav-sidebar-list.nav .nav>li>a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+}
+
+/* inactive nested */
+.nav-sidebar-list.nav ul.nav {
+    display: none;
+}
+/* active */
+.nav-sidebar-list.nav>.active>ul.nav {
+    display: block;
 }
 
 
@@ -66,6 +93,13 @@
     color: #fff;
 }
 
+section.group {
+    margin-bottom: 50px;
+}
+
 form.paypal {
     display: inline-block
+}
+li.paypal-entry {
+    padding-top: 30px;
 }
