@@ -13,5 +13,8 @@
     "public/components/",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "fuelux": "~3.12.0"
+  }
 }
