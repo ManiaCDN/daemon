@@ -1,0 +1,58 @@
+
+<div class="container">
+    <h2>My Servers</h2>
+    <p>List with your mirror servers.</p>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>IP</th>
+                <th>Enabled</th>
+                <th>Updated</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {{#each servers}}
+            {{#if active}}
+                <tr class="">
+            {{else}}
+                <tr class="active">
+            {{/if}}
+                <td>
+                    <code>
+                        {{ip4}}{{ip6}}
+                    </code>
+                </td>
+
+                <td>
+                    {{countrycode}}
+                </td>
+
+                <td>
+                    {{#if active}}
+                        <label class="label label-success">
+                            Active
+                        </label>
+                    {{else}}
+                        <label class="label label-warning">
+                            Inactive
+                        </label>
+                    {{/if}}
+                </td>
+
+                <td>
+                    <div class="server-status" data-status="{{status}}"></div>
+                </td>
+
+                <td>
+                    <a href="./servers/{{serverid}}">Edit</a>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+</div>

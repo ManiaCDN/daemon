@@ -1,0 +1,25 @@
+
+<div class="container">
+    <h2>My Servers</h2>
+    <p>List with your mirror servers.</p>
+
+    <form action="" method="post">
+        <div class="checkbox">
+            <label class="checkbox-custom" data-initialize="checkbox">
+                {{#if server.active}}
+                    <input type="checkbox" class="sr-only" name="active" value="1" checked="checked" >
+                {{else}}
+                    <input type="checkbox" class="sr-only" name="active" value="1" >
+                {{/if}}
+                Enable this server
+            </label>
+            <span class="help-block">
+                You can disable your server here. This will remove you from our DNS system. You will still be listed on our pages<br>
+                For permanent remove, please contact us!
+            </span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+
+</div>
