@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var config = require('./lib/config');
 var pool = require('./lib/database').pool;
@@ -13,8 +14,10 @@ var handlebars = require('express-handlebars');
 var routes = {};
     routes.about = require('./routes/about');
     routes.api = require('./routes/api');
+    routes.panel = require('./routes/panel');
 
 var app = express();
+
 
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 
@@ -28,13 +31,19 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(session({
+    secret: config.secret,
+    saveUninitialized: true,
+    resave: false
+}));
 
 app.use('/', routes.about);
 app.use('/api', routes.api);
+app.use('/panel', routes.panel);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    var err = new Error('Not Found: ' + req.path);
     err.status = 404;
     next(err);
 });
@@ -43,7 +52,7 @@ app.use(function (req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+if (config.development) {
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         console.error(err);

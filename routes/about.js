@@ -52,7 +52,6 @@ router.get('/', function (req, res, next) {
             mirrorsOnline: mirrorsOnline,
             mirrors: mirrors
         });
-        return next(false);
     }
 });
 
