@@ -19,7 +19,8 @@ var timer = setInterval(checkServers, 900000); // 15 min = 900000
 var transporter = nodemailer.createTransport(smtpTransport({
     port: 25,
     host: 'localhost',
-    secure: false
+    secure: false,
+    ignoreTLS: true
 }));
 
 
