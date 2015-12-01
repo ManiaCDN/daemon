@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "async": "^1.5.0",
-    "aws-sdk": "^2.2.19",
     "bcrypt": "^0.8.5",
     "body-parser": "~1.13.2",
     "commander": "^2.9.0",
@@ -20,7 +19,6 @@
     "express-session": "^1.12.1",
     "forever-monitor": "^1.7.0",
     "handlebars": "^4.0.5",
-    "jade": "~1.11.0",
     "knex": "^0.9.0",
     "list-diff": "^0.2.0",
     "moira": "^1.1.2",
