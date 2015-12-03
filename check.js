@@ -4,7 +4,6 @@
 var async = require('async');
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
-var moment = require('moment');
 
 var config = require('./lib/config');
 
@@ -13,7 +12,7 @@ var pool = require('./lib/database').pool;
 var timechecker = require('./lib/timechecker');
 var dns = require('./lib/dns');
 
-var timer = setInterval(checkServers, 900000); // 15 min = 900000
+setInterval(checkServers, 900000); // 15 min = 900000
 
 // Mail transporter
 var transporter = nodemailer.createTransport(smtpTransport({
@@ -32,7 +31,7 @@ function checkServers(forceDnsUpdate) {
     var reportList = [];
 
     // Get servers from database
-    pool.query('SELECT server.*, maintainer.email FROM server, maintainer WHERE server.maintainerid = maintainer.maintainerid AND server.active = 1;', function (err, rows, fields) {
+    pool.query('SELECT server.*, maintainer.email FROM server, maintainer WHERE server.maintainerid = maintainer.maintainerid AND server.active = 1;', function (err, rows) {
         if (err) {
             console.error(err);
             inCheck = false;
@@ -76,7 +75,7 @@ function checkServers(forceDnsUpdate) {
                 // Update database entry when status has been changed. And e-mail owner.
                 if (needUpdate) {
                     // Database update
-                    pool.query('UPDATE server SET status = ? WHERE serverid = ?;', [newStatus, serverid], function (err, result) {
+                    pool.query('UPDATE server SET status = ? WHERE serverid = ?;', [newStatus, serverid], function (err) {
                         if (err) {
                             console.error(err);
                         }
@@ -98,7 +97,7 @@ function checkServers(forceDnsUpdate) {
                     return callback(null);
                 }
             });
-        }, function(err) {
+        }, function() {
             console.log('==== Server Checks Done ====');
 
             // Force updating dns on first boot!
@@ -109,7 +108,7 @@ function checkServers(forceDnsUpdate) {
             // Do the DNS Update
             if (DNSUpdate) {
                 console.log('==== DNS Update needed.. Executing... ====');
-                dns.updateRecords(function (err, success) {
+                dns.updateRecords(function () { // err, success
                     inCheck = false;
                     sendReport(AnyUpdate, reportList);
 

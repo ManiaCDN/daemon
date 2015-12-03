@@ -5,16 +5,12 @@
  * Module dependencies.
  */
 var database = require('./lib/database');
-var config = require('./lib/config');
 var moira = require('moira');
 var async = require('async');
 
 var dns = require('./lib/dns');
 
 var ipAddress = null;
-
-var server = null;
-var port = null;
 
 async.series([
     function(callback) {
@@ -29,11 +25,11 @@ async.series([
         });
     },
     function(callback) {
-        database.makeConnection(function (err, connection) {
+        database.makeConnection(function () {
             console.log("Database connection made!");
 
-            var debug = require('debug')('ManiaCDN:server');
-            var check = require('./check');
+            require('debug')('ManiaCDN:server');
+            require('./check');
 
             return callback(null);
         });
