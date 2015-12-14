@@ -124,12 +124,12 @@ function checkServers(forceDnsUpdate) {
 
 function sendReport(updated, reportList) {
     if (updated) {
-        /*transporter.sendMail({
+        transporter.sendMail({
             from: config.admin.sender,
             to: config.admin.email,
             subject: 'ManiaCDN.net: Update list (' + moment().format('DD-MM-YYYY HH:mm:ss') + ')',
             text: 'Changes logged: \n\n' + reportList.join('\n') + '\n\n\nAuto Generated!'
-        });*/
+        });
     }
 }
 
