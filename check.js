@@ -4,6 +4,7 @@
 var async = require('async');
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
+var moment = require('moment');
 
 var config = require('./lib/config');
 
