@@ -117,7 +117,7 @@ function checkServers(forceDnsUpdate) {
                 });
             }else{
                 inCheck = false;
-                sendReport(AnyUpdate, reportList);
+                //sendReport(AnyUpdate, reportList);
             }
         });
     });
