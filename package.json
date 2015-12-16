@@ -13,6 +13,7 @@
     "debug": "~2.2.0",
     "forever-monitor": "^1.7.0",
     "handlebars": "^4.0.5",
+    "ip-address": "^5.0.2",
     "knex": "^0.9.0",
     "list-diff": "^0.2.0",
     "moira": "^1.1.2",
