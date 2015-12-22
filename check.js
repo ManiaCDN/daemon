@@ -45,81 +45,104 @@ function checkServers(forceDnsUpdate) {
 
         console.log('==== STARTING SERVER CHECKS ====');
 
-        // Start timestamp checker
-        async.eachSeries(rows, function(row, callback) {
-            let serverid = row.serverid;
-            let ip4 = row.ip4;
-            let ip6 = row.ip6;
-            let status = row.status;
-            let email = row.email;
+        console.log('Checking master server timestamp.txt...');
+        timechecker.checkMaster()
+            .then(function() {
+                // All okay!
+                console.log('Master server is good...');
+                console.log('');
+                checkAllServers();
+            })
+            .catch(function() {
+                // No good! The master server has a problem
+                // Send mail to admins and stop this checking round
+                console.log('Master server has troubles! Sending out mail to admins...');
 
-            let ip = ip4 || ip6;
+                transporter.sendMail({
+                    from: config.admin.sender,
+                    to: config.admin.email,
+                    subject: 'ManiaCDN.net MASTER PROBLEMS!!',
+                    text: 'The master timestamp.txt isnt updated or not reachable by the checker! All servers are not checked right now!'
+                });
+            });
 
-            console.log('  Checking ' + ip + '...');
-            // Chech the server for status
-            timechecker.checkServer(ip, 80, status, function (err, needUpdate, needDNSUpdate, newStatus) {
-                console.log('     --> OldStatus: ' + status + ', newStatus: ' + newStatus);
+        var checkAllServers = function() {
+            // Start timestamp checker
+            async.eachSeries(rows, function(row, callback) {
+                let serverid = row.serverid;
+                let ip4 = row.ip4;
+                let ip6 = row.ip6;
+                let status = row.status;
+                let email = row.email;
 
-                // Add to report
-                if (needUpdate) {
-                    reportList.push("Server (#" + serverid + ") " + ip + " has not been changed. STATUS = " + newStatus);
-                    AnyUpdate = true;
-                }else{
-                    reportList.push("Server (#" + serverid + ") " + ip + " changed from OLDSTATUS = " + status + " to STATUS = " + newStatus);
-                }
+                let ip = ip4 || ip6;
 
-                // Set the global dns update flag when status has changed and made the server inactive.
-                if (needDNSUpdate) {
+                console.log('  Checking ' + ip + '...');
+                // Chech the server for status
+                timechecker.checkServer(ip, 80, status, function (err, needUpdate, needDNSUpdate, newStatus) {
+                    console.log('     --> OldStatus: ' + status + ', newStatus: ' + newStatus);
+
+                    // Add to report
+                    if (needUpdate) {
+                        reportList.push("Server (#" + serverid + ") " + ip + " has not been changed. STATUS = " + newStatus);
+                        AnyUpdate = true;
+                    }else{
+                        reportList.push("Server (#" + serverid + ") " + ip + " changed from OLDSTATUS = " + status + " to STATUS = " + newStatus);
+                    }
+
+                    // Set the global dns update flag when status has changed and made the server inactive.
+                    if (needDNSUpdate) {
+                        DNSUpdate = true;
+                    }
+
+                    // Update database entry when status has been changed. And e-mail owner.
+                    if (needUpdate) {
+                        // Database update
+                        pool.query('UPDATE server SET status = ? WHERE serverid = ?;', [newStatus, serverid], function (err) {
+                            if (err) {
+                                console.error(err);
+                            }
+
+                            return callback(null);
+                        });
+
+                        // If status >= 4 then send mail too
+                        if (newStatus >= 4) {
+                            transporter.sendMail({
+                                from: config.admin.sender,
+                                to: email,
+                                bcc: config.admin.email,
+                                subject: 'Your mirror is outdated! (ip: ' + ip + ')',
+                                text: 'Hello, Your mirror (' + ip + ') is outdated, it hasn\'t been updating in over 24 hours! Please check the status of your sync script. (E-mail automaticly generated! Dont reply).'
+                            });
+                        }
+                    }else{
+                        return callback(null);
+                    }
+                });
+            }, function() {
+                console.log('==== Server Checks Done ====');
+
+                // Force updating dns on first boot!
+                if (forceDnsUpdate) {
                     DNSUpdate = true;
                 }
 
-                // Update database entry when status has been changed. And e-mail owner.
-                if (needUpdate) {
-                    // Database update
-                    pool.query('UPDATE server SET status = ? WHERE serverid = ?;', [newStatus, serverid], function (err) {
-                        if (err) {
-                            console.error(err);
-                        }
+                // Do the DNS Update
+                if (DNSUpdate) {
+                    console.log('==== DNS Update needed.. Executing... ====');
+                    dns.updateRecords(function () { // err, success
+                        inCheck = false;
+                        sendReport(AnyUpdate, reportList);
 
-                        return callback(null);
+                        console.log('==== Done ====');
                     });
-
-                    // If status >= 4 then send mail too
-                    if (newStatus >= 4) {
-                        transporter.sendMail({
-                            from: config.admin.sender,
-                            to: email,
-                            bcc: config.admin.email,
-                            subject: 'Your mirror is outdated! (ip: ' + ip + ')',
-                            text: 'Hello, Your mirror (' + ip + ') is outdated, it hasn\'t been updating in over 24 hours! Please check the status of your sync script. (E-mail automaticly generated! Dont reply).'
-                        });
-                    }
                 }else{
-                    return callback(null);
+                    inCheck = false;
+                    //sendReport(AnyUpdate, reportList);
                 }
             });
-        }, function() {
-            console.log('==== Server Checks Done ====');
-
-            // Force updating dns on first boot!
-            if (forceDnsUpdate) {
-                DNSUpdate = true;
-            }
-
-            // Do the DNS Update
-            if (DNSUpdate) {
-                console.log('==== DNS Update needed.. Executing... ====');
-                dns.updateRecords(function () { // err, success
-                    inCheck = false;
-                    sendReport(AnyUpdate, reportList);
-
-                    console.log('==== Done ====');
-                });
-            }else{
-                inCheck = false;
-                //sendReport(AnyUpdate, reportList);
-            }
-        });
+        };
     });
 }
 
