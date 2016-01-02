@@ -84,10 +84,10 @@ function checkServers(forceDnsUpdate) {
 
                     // Add to report
                     if (needUpdate) {
-                        reportList.push("Server (#" + serverid + ") " + ip + " has not been changed. STATUS = " + newStatus);
+                        reportList.push("Server (#" + serverid + ") " + ip + ": Change! " + status + "  ===>  " + newStatus);
                         AnyUpdate = true;
                     }else{
-                        reportList.push("Server (#" + serverid + ") " + ip + " changed from OLDSTATUS = " + status + " to STATUS = " + newStatus);
+                        reportList.push("Server (#" + serverid + ") " + ip + ": No change.");
                     }
 
                     // Set the global dns update flag when status has changed and made the server inactive.
