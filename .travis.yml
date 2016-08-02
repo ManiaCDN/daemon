@@ -1,6 +1,8 @@
 language: node_js
-sudo: false
+sudo: true
 
 node_js:
   - "6"
   - "4"
+
+before_install: sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
