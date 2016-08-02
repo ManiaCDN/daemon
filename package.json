@@ -6,29 +6,29 @@
     "start": "node ./maniacdn.js"
   },
   "dependencies": {
-    "async": "^1.5.2",
-    "bcrypt": "^0.8.5",
+    "async": "^2.0.1",
+    "bcrypt": "^0.8.7",
     "commander": "^2.9.0",
     "daemon": "^1.1.0",
     "debug": "~2.2.0",
     "forever-monitor": "^1.7.0",
     "handlebars": "^4.0.5",
-    "ip-address": "^5.1.1",
-    "knex": "^0.9.0",
+    "ip-address": "^5.8.2",
+    "knex": "^0.11.9",
     "list-diff": "^0.2.0",
     "moira": "^1.1.2",
-    "moment": "^2.11.1",
-    "morgan": "~1.6.1",
-    "mysql": "^2.10.2",
+    "moment": "^2.14.1",
+    "morgan": "^1.7.0",
+    "mysql": "^2.11.1",
     "nice-route53": "github:tomvlk/nice-route53",
-    "nodemailer": "^1.11.0",
-    "nodemailer-smtp-transport": "^1.1.0",
+    "nodemailer": "^2.5.0",
+    "nodemailer-smtp-transport": "^2.6.0",
     "querystring": "^0.2.0",
-    "request": "^2.67.0",
+    "request": "^2.74.0",
     "underscore": "^1.8.3",
-    "xml2json": "^0.9.0"
+    "xml2json": "^0.9.1"
   },
   "devDependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^1.0.1"
   }
 }
