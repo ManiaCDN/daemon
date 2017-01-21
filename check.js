@@ -147,7 +147,7 @@ function checkServers(forceDnsUpdate) {
 }
 
 function sendReport(updated, reportList) {
-    if (updated) {
+    if (updated && config.development) {
         transporter.sendMail({
             from: config.admin.sender,
             to: config.admin.email,
