@@ -45,7 +45,7 @@ function checkServers(forceDnsUpdate) {
 
         console.log('==== STARTING SERVER CHECKS ====');
 
-        console.log('Checking master server timestamp.txt...');
+        /*console.log('Checking master server timestamp.txt...');
         timechecker.checkMaster()
             .then(function() {
                 // All okay!
@@ -65,6 +65,8 @@ function checkServers(forceDnsUpdate) {
                     text: 'The master timestamp.txt isnt updated or not reachable by the checker! All servers are not checked right now!'
                 });
             });
+        */
+        checkAllServers();
 
         var checkAllServers = function() {
             // Start timestamp checker
