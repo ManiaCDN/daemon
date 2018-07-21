@@ -66,7 +66,6 @@ function checkServers(forceDnsUpdate) {
                 });
             });
         */
-        checkAllServers();
 
         var checkAllServers = function() {
             // Start timestamp checker
@@ -145,6 +144,8 @@ function checkServers(forceDnsUpdate) {
                 }
             });
         };
+
+        checkAllServers();
     });
 }
 
