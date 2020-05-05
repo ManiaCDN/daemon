@@ -14,7 +14,7 @@
     "forever-monitor": "^1.7.0",
     "handlebars": "^4.0.5",
     "ip-address": "^5.8.2",
-    "knex": "^0.11.9",
+    "knex": "^0.21.1",
     "list-diff": "^0.2.0",
     "moira": "^1.1.2",
     "moment": "^2.14.1",
