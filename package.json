@@ -12,7 +12,7 @@
     "daemon": "^1.1.0",
     "debug": "^4.1.1",
     "forever-monitor": "^2.0.0",
-    "handlebars": "^4.0.5",
+    "handlebars": "^4.7.7",
     "ip-address": "^5.8.2",
     "knex": "^0.21.1",
     "list-diff": "^0.2.0",
