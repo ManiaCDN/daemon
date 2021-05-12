@@ -21,7 +21,7 @@
     "morgan": "^1.7.0",
     "mysql": "^2.11.1",
     "nice-route53": "github:tomvlk/nice-route53",
-    "nodemailer": "^2.5.0",
+    "nodemailer": "^6.4.16",
     "nodemailer-smtp-transport": "^2.6.0",
     "querystring": "^0.2.0",
     "request": "^2.74.0",
