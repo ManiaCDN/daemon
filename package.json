@@ -17,7 +17,7 @@
     "knex": "^0.21.1",
     "list-diff": "^0.2.0",
     "moira": "^1.1.2",
-    "moment": "^2.14.1",
+    "moment": "^2.29.2",
     "morgan": "^1.7.0",
     "mysql": "^2.11.1",
     "nice-route53": "github:tomvlk/nice-route53",
